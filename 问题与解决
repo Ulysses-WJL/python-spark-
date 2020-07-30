@@ -1,0 +1,28 @@
+1. scala下载慢
+
+http://downloads.typesafe.com/scala/2.12.12/scala-2.12.12.tgz
+
+
+2. pyspark 使用python3
+
+只需要在bin/pyspark中增加
+
+export PYSPARK_PYTHON=python3
+
+
+修改spark-env.sh文件，在末尾添加export PYSPARK_PYTHON=/usr/bin/python3
+
+
+
+sysctl -a |grep hung_task_timeout_secs
+
+sysctl -w vm.dirty_ratio=10
+
+sysctl -w vm.dirty_background_ratio=5
+
+sysctl -w kernel.hung_task_timeout_secs=0
+
+sysctl -p
+
+Bad owner or permissions on /root/.ssh/confi
+RUN chmod 600 ~/.ssh/config
