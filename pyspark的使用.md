@@ -1,8 +1,8 @@
 <!--
  * @Author: ulysses
  * @Date: 1970-01-01 08:00:00
- * @LastEditTime: 2020-07-28 09:54:59
- * @LastEditors: your name
+ * @LastEditTime: 2020-08-01 16:12:30
+ * @LastEditors: Please set LastEditors
  * @Description: 
  * @可以输入预定的版权声明、个性签名、空行等
 --> 
@@ -201,3 +201,48 @@ pyspark --master spark://hadoop-master:7077 \
 ```
 spark-submit --driver-memory 2g --master local[4] WordCount.py
 ```
+
+# Spark 读写 HBase数据
+
+把HBase的lib目录下的一些jar文件拷贝到Spark中，这些都是编程时需要引入的jar包，需要拷贝的jar文件包括：所有hbase开头的jar文件、guava-12.0.1.jar、htrace-core-3.1.0-incubating.jar和protobuf-java-2.5.0.jar'
+```
+$ cd /usr/local/spark/jars
+$ mkdir hbase
+$ cd hbase
+$ cp /usr/local/hbase/lib/hbase*.jar ./
+$ cp /usr/local/hbase/lib/guava-12.0.1.jar ./
+$ cp /usr/local/hbase/lib/htrace-core-3.1.0-incubating.jar ./
+$ cp /usr/local/hbase/lib/protobuf-java-2.5.0.jar ./
+```
+
+此外，在Spark 2.0以上版本中，缺少把HBase数据转换成Python可读取数据的jar包，需要另行下载。可以访问下面地址下载spark-examples_2.11-1.6.0-typesafe-001.jar：
+
+https://mvnrepository.com/artifact/org.apache.spark/spark-examples_2.11/1.6.0-typesafe-001
+
+下载以后保存到“/usr/local/spark/jars/hbase/”目录中
+
+spark-env.sh文件 设置
+```
+export SPARK_DIST_CLASSPATH=$(/usr/local/hadoop/bin/hadoop classpath):$(/usr/local/hbase/bin/hbase classpath):/usr/local/spark/jars/hbase/*
+```
+
+读取hbase数据:
+```
+host = "hadoop-master"
+table = "student"
+conf = {"hbase.zookeeper.quorum": host, "hbase.mapreduce.inputtable": table}
+keyConv = "org.apache.spark.examples.pythonconverters.ImmutableBytesWritableToStringConverter"
+valueConv = "org.apache.spark.examples.pythonconverters.HBaseResultToStringConverter"
+
+hbase_rdd = sc.newAPIHadoopRDD("org.apache.hadoop.hbase.mapreduce.TableInputFormat",
+                               "org.apache.hadoop.hbase.io.ImmutableBytesWritable",
+                               "org.apache.hadoop.hbase.client.Result",
+                               keyConverter=keyConv,
+                               valueConverter=valueConv,
+                               conf=conf)
+hbase_rdd.cache()      
+output = hbase_rdd.collect()
+for k, v in output:
+    print(k, v) 
+```
+写入数据

@@ -1,1 +1,4 @@
 pythonsparkexample/PythonProject/data/covtype.data
+pythonsparkexample/PythonProject/data/kddcup.data_10_percent_corrected
+spark_fundation
+spark_tutorial/data/*

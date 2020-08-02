@@ -1,7 +1,7 @@
 '''
 @Author: ulysses
 @Date: 1970-01-01 08:00:00
-@LastEditTime: 2020-07-30 11:18:12
+@LastEditTime: 2020-07-31 09:36:39
 @LastEditors: Please set LastEditors
 @Description: 
 '''
@@ -23,7 +23,7 @@ from pyspark.ml import Pipeline
 
 def create_spark_session():
     conf = SparkConf().setAppName("ML LR").set(
-        "spark.ui.shaowConsoleProgress", 'false')
+        "spark.ui.showConsoleProgress", 'false')
     spark = SparkSession.builder.config(conf=conf).getOrCreate()
     sc = spark.sparkContext
     print("Master: {}".format(sc.master))
