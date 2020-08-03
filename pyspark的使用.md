@@ -1,7 +1,7 @@
 <!--
  * @Author: ulysses
  * @Date: 1970-01-01 08:00:00
- * @LastEditTime: 2020-08-01 16:12:30
+ * @LastEditTime: 2020-08-03 10:25:33
  * @LastEditors: Please set LastEditors
  * @Description: 
  * @可以输入预定的版权声明、个性签名、空行等
@@ -154,12 +154,21 @@ export PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --allow-root'
 export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:$PYTHONPATH
 
 ```
+
+```
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --allow-root' pyspark 
+```
+
 创建目录
 ```
 root@hadoop-master:~# mkdir -p pyspark_project
 root@hadoop-master:~# cd pyspark_project/
 root@hadoop-master:~/pyspark_project# pyspark
 
+```
+
+```
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --allow-root' pyspark 
 ```
 
 YARN模式
@@ -246,3 +255,24 @@ for k, v in output:
     print(k, v) 
 ```
 写入数据
+
+
+# Spark streaming kafka 
+
+下载 `spark-streaming-kafka-0-8_2.11-2.4.6.jar`
+放置于 `/usr/local/spark/jars/kafka`
+
+把Kafka安装目录的libs目录下的所有jar文件复制到“/usr/local/spark/jars/kafka”目录下，请在终端中执行下面命令：
+```
+cd /usr/local/kafka/libs
+cp ./* /usr/local/spark/jars/kafka
+```
+
+修改`spark-env.sh`
+```
+export SPARK_DIST_CLASSPATH=$(/usr/local/hadoop/bin/hadoop classpath):$(/usr/local/hbase/bin/hbase classpath):/usr/local/spark/jars/hbase/*:/usr/local/spark/examples/jars/*:/usr/local/spark/jars/kafka/*:/usr/local/kafka/libs/*
+
+```
+从 `http://search.maven.org/` 下载 `org.apache.spark:spark-streaming-kafka-0-10-assembly_2.11:2.4.6` 
+放置于``下
+
