@@ -1,8 +1,8 @@
 '''
 @Author: ulysses
 @Date: 1970-01-01 08:00:00
-@LastEditTime: 2020-07-31 11:28:40
-@LastEditors: Please set LastEditors
+LastEditTime: 2020-08-05 22:18:09
+LastEditors: ulysses
 @Description: 
 '''
 import os
@@ -78,7 +78,7 @@ def train(train_data):
 
     assembler = VectorAssembler(inputCols=feature_columns, 
                                 outputCol='afeatures')
-    # 将星期 月份 小时 等会被视为分类字段
+    # 将星期 月份 小时 等会被视为分类字段  将原始值转换为类别索引
     indexer = VectorIndexer(inputCol='afeatures', 
                             outputCol='features',
                             maxCategories=24)
