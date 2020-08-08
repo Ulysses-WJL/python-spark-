@@ -1,8 +1,8 @@
 <!--
  * @Author: ulysses
  * @Date: 1970-01-01 08:00:00
- * @LastEditTime: 2020-08-03 10:25:33
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-08-08 20:40:18
+ * @LastEditors: ulysses
  * @Description: 
  * @可以输入预定的版权声明、个性签名、空行等
 --> 
@@ -276,3 +276,9 @@ export SPARK_DIST_CLASSPATH=$(/usr/local/hadoop/bin/hadoop classpath):$(/usr/loc
 从 `http://search.maven.org/` 下载 `org.apache.spark:spark-streaming-kafka-0-10-assembly_2.11:2.4.6` 
 放置于``下
 
+
+# Graphframes
+
+```
+pyspark --packages graphframes:graphframes:0.8.0-spark2.4-s_2.11
+```
