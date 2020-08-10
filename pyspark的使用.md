@@ -1,7 +1,7 @@
 <!--
  * @Author: ulysses
  * @Date: 1970-01-01 08:00:00
- * @LastEditTime: 2020-08-08 20:40:18
+ * @LastEditTime: 2020-08-09 20:33:14
  * @LastEditors: ulysses
  * @Description: 
  * @可以输入预定的版权声明、个性签名、空行等
@@ -280,5 +280,9 @@ export SPARK_DIST_CLASSPATH=$(/usr/local/hadoop/bin/hadoop classpath):$(/usr/loc
 # Graphframes
 
 ```
-pyspark --packages graphframes:graphframes:0.8.0-spark2.4-s_2.11
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook' pyspark --packages graphframes:graphframes:0.8.0-spark2.4-s_2.11
+```
+
+```
+PYSPARK_DRIVER_PYTHON=/home/ulysses/anaconda3/bin/jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook' pyspark --packages graphframes:graphframes:0.8.0-spark2.4-s_2.11
 ```
