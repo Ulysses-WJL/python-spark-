@@ -1,8 +1,8 @@
 '''
 @Author: ulysses
 @Date: 1970-01-01 08:00:00
-@LastEditTime: 2020-07-31 09:36:39
-@LastEditors: Please set LastEditors
+LastEditTime: 2020-08-18 09:42:43
+LastEditors: ulysses
 @Description: 
 '''
 import time
@@ -61,9 +61,8 @@ def prepare_data(spark):
     df = row_df.select(
         ['url', 'alchemy_category']+
         [replace_question(col(column)).cast(typ.DoubleType()).alias(column) 
-            for column in row_df.columns[4:]
-        
-        ])
+            for column in row_df.columns[4:]]
+        )
     train_df, test_df = df.randomSplit([0.7, 0.3])
     print("将数据分trainData: {}, testData: {}".format(
         train_df.count(), test_df.count()

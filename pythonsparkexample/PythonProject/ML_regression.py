@@ -21,7 +21,7 @@ from pyspark.ml.evaluation import RegressionEvaluator
 
 
 def create_spark_session():
-    conf = SparkConf().setAppName("ML MultiClassClassification").set(
+    conf = SparkConf().setAppName("ML Regression").set(
         "spark.ui.showConsoleProgress", "false"
     )
     spark = SparkSession.builder.config(conf=conf).getOrCreate()

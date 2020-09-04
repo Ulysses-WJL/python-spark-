@@ -1,8 +1,8 @@
 '''
 @Author: ulysses
 @Date: 1970-01-01 08:00:00
-@LastEditTime: 2020-07-31 10:50:59
-@LastEditors: Please set LastEditors
+LastEditTime: 2020-08-18 09:51:02
+LastEditors: ulysses
 @Description: 
 '''
 import os
@@ -86,7 +86,7 @@ def train(train_data):
     evaluator = MulticlassClassificationEvaluator(
         predictionCol='prediction',  # 多元分类 使用y_pred
          labelCol='label',
-          metricName='accuracy')
+          metricName='accuracy')  # f1
     tvs = TrainValidationSplit(
         estimator=dt, 
         estimatorParamMaps=grid_search,

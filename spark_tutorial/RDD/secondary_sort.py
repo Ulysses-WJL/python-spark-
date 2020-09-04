@@ -1,8 +1,8 @@
 '''
 @Author: ulysses
 @Date: 1970-01-01 08:00:00
-@LastEditTime: 2020-08-01 17:21:43
-@LastEditors: Please set LastEditors
+LastEditTime: 2020-08-17 16:05:05
+LastEditors: ulysses
 @Description: 
 '''
 from pyspark import SparkConf, SparkContext
@@ -23,7 +23,7 @@ def main():
     conf = SparkConf().setAppName('spark_sort').setMaster('local[1]')
     sc = SparkContext(conf=conf)
 
-    rdd_04 = sc.textFile("file:///mnt/data1/workspace/data_analysis_mining/Python+Spark2.0+Hadoop机器学习与大数据实战/spark_tutorial/data/file4.txt")
+    rdd_04 = sc.textFile("../data/file4.txt")
     res1 = rdd_04.filter(lambda line: len(line.strip()) > 0)
 
     res2 = res1.map(
